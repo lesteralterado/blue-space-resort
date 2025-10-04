@@ -1,4 +1,4 @@
-export default function SpecialOffer() = {
+export default function SpecialOffer(): preact.JSX.Element {
     const offers = [
     {
       id: 1,
@@ -26,31 +26,14 @@ export default function SpecialOffer() = {
     return (
         <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white">
       <div className="max-w-7xl mx-auto">
-        <motion.div
-          className="text-center mb-12"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-        >
+        <div className="text-center mb-12">
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Special Offers</h2>
           <p className="text-xl text-gray-600">Exclusive packages designed for your perfect vacation</p>
-        </motion.div>
+        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {offers.map((offer, index) => (
-            <motion.div
-              key={offer.id}
-              className="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-100"
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
-              viewport={{ once: true }}
-              whileHover={{ 
-                scale: 1.03,
-                boxShadow: "0 20px 40px rgba(0,0,0,0.1)"
-              }}
-            >
+          {offers.map((offer, _index) => (
+            <div key={offer.id} className="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-100 hover:scale-103 transition-transform duration-200" style={{ boxShadow: '0 10px 30px rgba(0,0,0,0.06)' }}>
               <div className="h-48 bg-gradient-to-br from-teal-400 to-blue-500"></div>
               <div className="p-6">
                 <h3 className="text-xl font-bold mb-2 text-gray-900">{offer.title}</h3>
@@ -68,7 +51,7 @@ export default function SpecialOffer() = {
                   Learn More
                 </button>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

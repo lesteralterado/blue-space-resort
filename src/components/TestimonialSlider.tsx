@@ -1,4 +1,6 @@
-export default function TestimonialSlider() = {
+import { useState } from 'preact/hooks'
+
+export default function TestimonialSlider(): preact.JSX.Element {
     const testimonials = [
     {
       id: 1,
@@ -36,33 +38,21 @@ export default function TestimonialSlider() = {
     return (
         <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50">
       <div className="max-w-4xl mx-auto">
-        <motion.div
-          className="text-center mb-12"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-        >
+        <div className="text-center mb-12">
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">What Our Guests Say</h2>
           <p className="text-xl text-gray-600">Real experiences from our valued guests</p>
-        </motion.div>
+        </div>
 
         <div className="relative">
-          <motion.div
-            key={currentSlide}
-            className="text-center"
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -50 }}
-            transition={{ duration: 0.5 }}
-          >
+          <div key={currentSlide} className="text-center">
             <div className="mb-6">
               <img
                 src={testimonials[currentSlide].avatar}
                 alt={testimonials[currentSlide].name}
                 className="w-20 h-20 rounded-full mx-auto mb-4 shadow-lg"
-                onError={(e) => {
-                  e.target.src = `data:image/svg+xml;base64,${btoa(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 150"><rect width="150" height="150" fill="#e5e7eb"/><text x="75" y="75" text-anchor="middle" dy=".3em" fill="#9ca3af" font-family="Arial" font-size="60">${testimonials[currentSlide].name[0]}</text></svg>`)}`;
+                onError={(e: Event) => {
+                  const target = e.currentTarget as HTMLImageElement
+                  target.src = `data:image/svg+xml;base64,${btoa(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 150"><rect width="150" height="150" fill="#e5e7eb"/><text x="75" y="75" text-anchor="middle" dy=".3em" fill="#9ca3af" font-family="Arial" font-size="60">${testimonials[currentSlide].name[0]}</text></svg>`)}`
                 }}
               />
               <h3 className="text-xl font-bold text-gray-900">{testimonials[currentSlide].name}</h3>
@@ -71,14 +61,14 @@ export default function TestimonialSlider() = {
             <blockquote className="text-lg text-gray-700 italic max-w-2xl mx-auto mb-8">
               "{testimonials[currentSlide].text}"
             </blockquote>
-          </motion.div>
+          </div>
 
           <div className="flex justify-center items-center space-x-4">
             <button
               onClick={prevSlide}
               className="p-2 rounded-full bg-white shadow-md hover:shadow-lg transition-shadow duration-200"
             >
-              <ChevronLeft className="w-6 h-6 text-gray-600" />
+              <svg className="w-6 h-6 text-gray-600" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M15 18l-6-6 6-6"/></svg>
             </button>
             
             <div className="flex space-x-2">
@@ -97,7 +87,7 @@ export default function TestimonialSlider() = {
               onClick={nextSlide}
               className="p-2 rounded-full bg-white shadow-md hover:shadow-lg transition-shadow duration-200"
             >
-              <ChevronRight className="w-6 h-6 text-gray-600" />
+              <svg className="w-6 h-6 text-gray-600" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 6l6 6-6 6"/></svg>
             </button>
           </div>
         </div>
